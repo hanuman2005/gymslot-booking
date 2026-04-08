@@ -2,6 +2,7 @@ import React, { useState, useEffect, useCallback } from "react";
 import "./Dashboard.css";
 import SlotsList from "./SlotsList";
 import MyBookings from "./MyBookings";
+import API_URL from "../config";
 
 function Dashboard({ user, token, onLogout }) {
   const [activeTab, setActiveTab] = useState("slots");
@@ -12,7 +13,7 @@ function Dashboard({ user, token, onLogout }) {
   const fetchSlots = useCallback(async () => {
     setLoading(true);
     try {
-      const response = await fetch(`${process.env.REACT_APP_API_URL}/slots`, {
+      const response = await fetch(`${API_URL}/slots`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       const data = await response.json();
@@ -28,7 +29,7 @@ function Dashboard({ user, token, onLogout }) {
     setLoading(true);
     try {
       const response = await fetch(
-        `${process.env.REACT_APP_API_URL}/bookings`,
+        `${API_URL}/bookings`,
         { headers: { Authorization: `Bearer ${token}` } },
       );
       const data = await response.json();
@@ -51,7 +52,7 @@ function Dashboard({ user, token, onLogout }) {
   const handleBookSlot = async (slotId) => {
     try {
       const response = await fetch(
-        `${process.env.REACT_APP_API_URL}/bookings`,
+        `${API_URL}/bookings`,
         {
           method: "POST",
           headers: {
@@ -84,7 +85,7 @@ function Dashboard({ user, token, onLogout }) {
 
     try {
       const response = await fetch(
-        `${process.env.REACT_APP_API_URL}/bookings/${bookingId}`,
+        `${API_URL}/bookings/${bookingId}`,
         {
           method: "DELETE",
           headers: { Authorization: `Bearer ${token}` },

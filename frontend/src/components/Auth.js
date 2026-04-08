@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import "./Auth.css";
+import API_URL from "../config";
 
 function Auth({ onLogin }) {
   const [isLogin, setIsLogin] = useState(true);
@@ -25,14 +26,11 @@ function Auth({ onLogin }) {
 
     try {
       const endpoint = isLogin ? "/auth/login" : "/auth/register";
-      const response = await fetch(
-        `${process.env.REACT_APP_API_URL}${endpoint}`,
-        {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(formData),
-        },
-      );
+      const response = await fetch(`${API_URL}${endpoint}`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      });
 
       const data = await response.json();
 
