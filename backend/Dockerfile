@@ -1,21 +1,20 @@
-# Build at 5:22 PM - cache bust
-# Use Node.js official image
+# Build 5:25 PM
 FROM node:18-alpine
-# Force rebuild - 5:14 PM
-# Set working directory
+
 WORKDIR /app
 
-# Copy package files (Railway root is /backend)
+# Copy package files
 COPY package*.json ./
 
-# Install dependencies
-RUN npm install
+# Install dependencies - fail if npm install fails
+RUN npm ci --only=production
 
 # Copy source code
 COPY src ./src
 
-# Expose port
+# Verify files exist
+RUN ls -la /app/src/server.js
+
 EXPOSE 5000
 
-# Start the server
 CMD ["node", "src/server.js"]
