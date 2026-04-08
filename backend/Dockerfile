@@ -1,19 +1,18 @@
 FROM node:18-alpine
 
-# Set working directory
 WORKDIR /app
 
-# Copy package files first (for caching)
-COPY package*.json ./
+# Copy backend package files
+COPY backend/package*.json ./
 
-# Install only production dependencies
+# Install dependencies
 RUN npm ci --omit=dev
 
-# Copy source code
-COPY src ./src
+# Copy backend source
+COPY backend/src ./src
 
-# Expose the port Railway provides
+# Expose port
 EXPOSE 5000
 
-# Start the app
+# Start app
 CMD ["node", "src/server.js"]
