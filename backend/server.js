@@ -13,7 +13,26 @@ const app = express();
  * CORS: Allow requests from frontend on different port/domain
  * JSON: Parse incoming request bodies as JSON
  */
-app.use(cors());
+// Configure CORS to allow both development and production frontends
+const corsOptions = {
+  origin: function (origin, callback) {
+    const allowedOrigins = [
+      "http://localhost:3000",
+      "https://gymslot-booking.vercel.app",
+      "https://www.gymslot-booking.vercel.app",
+    ];
+
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error("Not allowed by CORS"));
+    }
+  },
+  credentials: true,
+  optionsSuccessStatus: 200,
+};
+
+app.use(cors(corsOptions));
 app.use(express.json());
 
 /**
