@@ -1,4 +1,4 @@
-ARG BUILD_ID=6a94906
+ARG BUILD_ID=render-build-1
 FROM node:18-alpine
 
 WORKDIR /app
