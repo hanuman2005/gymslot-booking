@@ -6,7 +6,7 @@ WORKDIR /app
 COPY package*.json ./
 
 # Install dependencies
-RUN npm ci --omit=dev
+RUN npm install --only=production
 
 # Copy all application files (models, controllers, routes, db, middleware, server.js)
 COPY . .
@@ -18,4 +18,4 @@ EXPOSE 5000
 CMD ["node", "server.js"]
 
 # Start app
-CMD ["node", "src/server.js"]
+CMD ["node", "server.js"]
