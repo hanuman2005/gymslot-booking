@@ -1,3 +1,4 @@
+ARG BUILD_ID=6a94906
 FROM node:18-alpine
 
 WORKDIR /app
