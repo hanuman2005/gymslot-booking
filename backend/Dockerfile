@@ -2,10 +2,13 @@ FROM node:18-alpine
 
 WORKDIR /app
 
-COPY package*.json ./
+# Copy backend package.json
+COPY backend/package*.json ./
+
 RUN npm ci --only=production
 
-COPY src ./src
+# Copy backend source
+COPY backend/src ./src
 
 EXPOSE 5000
 
