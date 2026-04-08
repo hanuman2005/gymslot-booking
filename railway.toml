@@ -1,0 +1,8 @@
+[build]
+builder = "dockerfile"
+dockerfile = "Dockerfile"
+buildCommand = "npm install"
+
+[deploy]
+startCommand = "node src/server.js"
+healthcheckPath = "/api/health"
