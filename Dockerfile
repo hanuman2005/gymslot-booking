@@ -4,14 +4,14 @@ FROM node:18-alpine
 # Set working directory
 WORKDIR /app
 
-# Copy backend package files from repo root
-COPY backend/package*.json ./
+# Copy package files (Railway root is /backend)
+COPY package*.json ./
 
 # Install dependencies
 RUN npm install
 
-# Copy backend source code
-COPY backend/src ./src
+# Copy source code
+COPY src ./src
 
 # Expose port
 EXPOSE 5000
