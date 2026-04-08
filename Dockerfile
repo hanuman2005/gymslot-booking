@@ -1,15 +1,16 @@
 # Use Node.js official image
 FROM node:18-alpine
 
+WORKDIR /app
+
+# Copy backend package files
+COPY backend/package*.json ./backend/
+
+# Install backend dependencies
 WORKDIR /app/backend
-
-# Copy backend files
-COPY backend/package*.json ./
-
-# Install dependencies
 RUN npm install
 
-# Copy source code
+# Copy backend source code
 COPY backend/src ./src
 
 # Expose port
