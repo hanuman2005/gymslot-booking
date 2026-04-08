@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import "./Dashboard.css";
 import SlotsList from "./SlotsList";
 import MyBookings from "./MyBookings";
@@ -9,15 +9,7 @@ function Dashboard({ user, token, onLogout }) {
   const [bookings, setBookings] = useState([]);
   const [loading, setLoading] = useState(false);
 
-  useEffect(() => {
-    if (activeTab === "slots") {
-      fetchSlots();
-    } else {
-      fetchMyBookings();
-    }
-  }, [activeTab]);
-
-  const fetchSlots = async () => {
+  const fetchSlots = useCallback(async () => {
     setLoading(true);
     try {
       const response = await fetch(`${process.env.REACT_APP_API_URL}/slots`, {
@@ -30,9 +22,9 @@ function Dashboard({ user, token, onLogout }) {
     } finally {
       setLoading(false);
     }
-  };
+  }, [token]);
 
-  const fetchMyBookings = async () => {
+  const fetchMyBookings = useCallback(async () => {
     setLoading(true);
     try {
       const response = await fetch(
@@ -46,7 +38,15 @@ function Dashboard({ user, token, onLogout }) {
     } finally {
       setLoading(false);
     }
-  };
+  }, [token]);
+
+  useEffect(() => {
+    if (activeTab === "slots") {
+      fetchSlots();
+    } else {
+      fetchMyBookings();
+    }
+  }, [activeTab, fetchSlots, fetchMyBookings]);
 
   const handleBookSlot = async (slotId) => {
     try {
