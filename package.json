@@ -1,0 +1,14 @@
+{
+  "name": "gym-slot-booking",
+  "version": "1.0.0",
+  "description": "Gym Slot Booking System",
+  "private": true,
+  "scripts": {
+    "start": "cd backend && npm start",
+    "dev": "cd backend && npm run dev",
+    "install": "cd backend && npm install && cd ../frontend && npm install"
+  },
+  "engines": {
+    "node": "18.x"
+  }
+}

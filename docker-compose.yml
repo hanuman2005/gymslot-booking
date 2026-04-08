@@ -1,0 +1,11 @@
+services:
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "5000:5000"
+    environment:
+      - DATABASE_URL=postgresql://neondb_owner:npg_ZVFNWGU37cSh@ep-late-rain-am0chllw-pooler.c-5.us-east-1.aws.neon.tech/neondb?sslmode=require
+      - JWT_SECRET=k7m9$xQ@2pL#nR8vW%jF4tB!sD0eA6yC3gH5uJ1wE9zM2pX%vK$nL@8rT#4mS7b
+      - NODE_ENV=production
