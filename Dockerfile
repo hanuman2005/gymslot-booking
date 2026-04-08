@@ -3,14 +3,14 @@ FROM node:18-alpine
 
 WORKDIR /app
 
-# Copy package files
-COPY package*.json ./
+# Copy package files from backend (Railway root is /backend)
+COPY backend/package*.json ./
 
-# Install dependencies - fail if npm install fails
+# Install dependencies
 RUN npm ci --only=production
 
-# Copy source code
-COPY src ./src
+# Copy source code from backend
+COPY backend/src ./src
 
 # Verify files exist
 RUN ls -la /app/src/server.js
