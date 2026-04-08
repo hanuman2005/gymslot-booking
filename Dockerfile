@@ -1,16 +1,16 @@
-# Build 5:25 PM
+# Build 5:48 PM - fix Dockerfile
 FROM node:18-alpine
 
 WORKDIR /app
 
-# Copy package files from backend (Railway root is /backend)
-COPY backend/package*.json ./
+# Copy package files (Railway context is /backend, so no prefix needed)
+COPY package*.json ./
 
 # Install dependencies
 RUN npm ci --only=production
 
-# Copy source code from backend
-COPY backend/src ./src
+# Copy source code
+COPY src ./src
 
 # Verify files exist
 RUN ls -la /app/src/server.js
