@@ -1,7 +1,5 @@
 [build]
 builder = "dockerfile"
-dockerfile = "Dockerfile"
-context = "backend"
 
 [deploy]
 startCommand = "npm start"
